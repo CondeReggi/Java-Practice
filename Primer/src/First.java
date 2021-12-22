@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.Scanner; // Importamos el scanner
 
 import javax.swing.JOptionPane;
@@ -89,6 +90,103 @@ public class First {
 		
 	}
 	
+	static Double CalculadoraPolacaInversaApp ( Double a , Double b , String signo ) {
+		
+		Double result = 0.0; 
+		
+		switch (signo) {
+			case "+": {
+				result = a + b;
+				break;
+			}
+			case "-": {
+				result = a - b;
+				break;
+			}
+			case "/": {
+				result = a / b;
+				break;
+			}
+			case "*": {
+				result = a * b;
+				break;
+			}
+			case "^": {
+				result = Math.pow(a, b);
+				break;
+			}
+			case "%": {
+				result = a % b;
+				break;
+			}
+		}
+		
+		return result;
+		
+	}
+	
+	static int sumatoria( int hasta ) {
+		
+		int result = 0;
+		
+		if ( hasta < 0 ) {
+			result = -1;
+		}else {
+			for ( int i = 1 ; i <= hasta ; i ++  ) {
+				result += i;
+			}
+		}
+		
+		return result;
+	}
+	
+	static int numerosIntroducidos() {
+		Scanner sc =  new Scanner(System.in);
+		int cantidad = 0;
+		int num = 0;
+		
+		while ( num != -1 ) {
+			num = sc.nextInt();
+			cantidad++;
+		}
+		return cantidad - 1;
+	}
+	
+	static String eliminarEspacios( String frase ) {
+		String[] parts = frase.split(" ");
+		String result = "";
+		
+		for (int i = 0; i < parts.length; i++) {
+			result += parts[i];
+		}
+		
+		return result;
+	}
+	
+	static String convertUpperOrLower ( String cadena , boolean Upper ) {
+		
+		if ( Upper ) {
+			return cadena.toUpperCase();
+		}else {
+			return cadena.toLowerCase();
+		}
+		
+	}
+	
+	
+	static String cuartaQuinta ( String cadena ) { 
+		
+		String result;
+		
+		String[] arr = cadena.split(" ");
+				
+		result = cadena.substring( cadena.indexOf(arr[3]) , cadena.indexOf(arr[4]) +  arr[4].length() );
+		
+		return result;
+		
+	}
+	
+	
 	public static void main(String[] args) {
 		
 		// mostrarNombre(); // Muestra el nombre mediante JOptionPane
@@ -137,6 +235,30 @@ public class First {
 		
 		// calcularRaices( sc.nextDouble() , sc.nextDouble() , sc.nextDouble() );
 		
+		//System.out.println( CalculadoraPolacaInversaApp( 385.0 , 2.0 , "as" ) );
+		
+		/*
+		int hasta;
+		
+		do {
+			hasta = sc.nextInt();
+		} while ( sumatoria( hasta ) == -1 );
+		
+		System.out.println( sumatoria( hasta ) );
+		*/
+		
+		// System.out.println( numerosIntroducidos() );
+		
+		// System.out.println( eliminarEspacios("Hola mi nombre es lUcas Conde  ") );
+		
+		// System.out.println( convertUpperOrLower( "ke loco LA BIDA" , false ) );
+		
+		// System.out.println("Hola como estas".split("").length); // El string como cadena de texto no se puede usar directamente length
+		
+		// System.out.println( "Hola".equals( "Holsa" ) ); // Con .equals puedo comparar 2 cadenas
+		
+		System.out.println( cuartaQuinta( "Hola como estas todo bien" ) );
+
 	}
 
 }
