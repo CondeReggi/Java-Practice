@@ -152,8 +152,65 @@ public class Second {
 	// OR
 
 	public static int getCount2(String str) {
-		return str.replaceAll("[^aeiou]", "").length(); // Remplazar todas menos las aeiou por un vacio y le saco el length
+		return str.replaceAll("[^aeiou]", "").length(); // Remplazar todas menos las aeiou por un vacio y le saco el
+														// length
 	}
+
+	/*
+	 * ATM machines allow 4 or 6 digit PIN codes and PIN codes cannot contain
+	 * anything but exactly 4 digits or exactly 6 digits.
+	 * 
+	 * If the function is passed a valid PIN string, return true, else return false.
+	 */
+
+	public static boolean validatePin(String pin) {
+		if (pin.length() == 4 || pin.length() == 6) {
+			int copia = pin.replaceAll("([0-9])", "").length();
+
+			return copia == 0;
+		} else {
+			return false;
+		}
+	}
+
+	// OR
+
+	public static boolean validatePin(String pin) {
+		return pin.matches("[0-9]{4}|[0-9]{6}");
+	}
+
+	/*
+	 * Complete the method/function so that it converts dash/underscore delimited
+	 * words into camel casing. The first word within the output should be
+	 * capitalized only if the original word was capitalized (known as Upper Camel
+	 * Case, also often referred to as Pascal case).
+	 */
+
+	static String toCamelCase(String s) {
+
+		String resultado = "";
+
+		StringBuilder result = new StringBuilder();
+
+		String[] arr = s.split("-|_");
+
+		for (int i = 0; i < arr.length; i++) {
+			String auxiliar;
+
+			if (i != 0) {
+				auxiliar = String.valueOf(arr[i].charAt(0)).toUpperCase() + arr[i].substring(1, arr[i].length());
+			} else {
+				auxiliar = arr[i].substring(0, arr[i].length());
+			}
+
+			result.append(auxiliar);
+		}
+
+		resultado = result.toString();
+		return resultado;
+	}
+	
+	
 
 	public static void main(String[] args) {
 
@@ -163,6 +220,16 @@ public class Second {
 									// del numero
 
 		System.out.println(5 | 11);
+
+		String s = "the_Stealth-Warrior";
+
+		System.out.println(String.valueOf(s.split("-|_")[0].charAt(0)).toUpperCase() + "Hola");
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("This is a sentence.");
+		sb.append("This is a sentence.");
+
+		System.out.println(sb);
 
 	}
 
