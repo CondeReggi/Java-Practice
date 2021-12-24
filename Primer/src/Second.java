@@ -262,13 +262,27 @@ public class Second {
 
 		firstNumPrime++;
 
-		while (!esPrimo(firstNumPrime)) {
-			firstNumPrime += g;
+		while (!esPrimo(firstNumPrime) && firstNumPrime <= n ) {
+			firstNumPrime += g - 1;
 		}
-
-		result[1] = firstNumPrime; // Agrego el segundo
+		
+		
+		if ( firstNumPrime > n ) {
+			return null;
+		}else {
+			result[1] = firstNumPrime; // Agrego el segundo
+		}
+		
 
 		return result;
+	}
+	
+	public static void mostrarArrayLong( long[] arr ) {
+		if ( arr != null ) {
+			for ( int i = 0 ; i < arr.length ; i++ ) { 
+				System.out.println( arr[i] );
+			}
+		}
 	}
 
 	public static void main(String[] args) {
@@ -292,7 +306,9 @@ public class Second {
 
 		System.out.println(esPrimo(18));
 		
-		// long[] aux = gap( 6 , 100 , 100 );
+		long[] aux = gap( 8 , 300 , 400 );
+		
+		mostrarArrayLong( aux );
 
 	}
 
