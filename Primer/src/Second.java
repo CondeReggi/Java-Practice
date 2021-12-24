@@ -163,7 +163,7 @@ public class Second {
 	 * If the function is passed a valid PIN string, return true, else return false.
 	 */
 
-	public static boolean validatePin(String pin) {
+	public static boolean validatePin1(String pin) {
 		if (pin.length() == 4 || pin.length() == 6) {
 			int copia = pin.replaceAll("([0-9])", "").length();
 
@@ -209,8 +209,67 @@ public class Second {
 		resultado = result.toString();
 		return resultado;
 	}
-	
-	
+
+	/*
+	 * The prime numbers are not regularly spaced. For example from 2 to 3 the gap
+	 * is 1. From 3 to 5 the gap is 2. From 7 to 11 it is 4. Between 2 and 50 we
+	 * have the following pairs of 2-gaps primes: 3-5, 5-7, 11-13, 17-19, 29-31,
+	 * 41-43
+	 * 
+	 * A prime gap of length n is a run of n-1 consecutive composite numbers between
+	 * two successive primes (see: http://mathworld.wolfram.com/PrimeGaps.html).
+	 * 
+	 * We will write a function gap with parameters:
+	 * 
+	 * g (integer >= 2) which indicates the gap we are looking for
+	 * 
+	 * m (integer > 2) which gives the start of the search (m inclusive)
+	 * 
+	 * n (integer >= m) which gives the end of the search (n inclusive)
+	 * 
+	 * n won't go beyond 1100000.
+	 * 
+	 * In the example above gap(2, 3, 50) will return [3, 5] or (3, 5) or {3, 5}
+	 * which is the first pair between 3 and 50 with a 2-gap.
+	 * 
+	 * So this function should return the first pair of two prime numbers spaced
+	 * with a gap of g between the limits m, n if these numbers exist otherwise `nil
+	 * or null or None or Nothing (or ... depending on the language).
+	 * 
+	 * In C++, Lua, COBOL: return in such a case {0, 0}. In F#: return [||]. In
+	 * Kotlin, Dart and Prolog: return []. In Pascal: return Type TGap (0, 0).
+	 */
+
+	public static boolean esPrimo(int numero) {
+		for (int i = numero - 1; i > 1; i--) {
+			if (numero % i == 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static long[] gap(int g, long m, long n) {
+		long[] result = new long[2];
+
+		int firstNumPrime = (int) m;
+
+		while (!esPrimo(firstNumPrime)) {
+			firstNumPrime++;
+		}
+
+		result[0] = firstNumPrime; // Agrego el primero
+
+		firstNumPrime++;
+
+		while (!esPrimo(firstNumPrime)) {
+			firstNumPrime += g;
+		}
+
+		result[1] = firstNumPrime; // Agrego el segundo
+
+		return result;
+	}
 
 	public static void main(String[] args) {
 
@@ -230,6 +289,10 @@ public class Second {
 		sb.append("This is a sentence.");
 
 		System.out.println(sb);
+
+		System.out.println(esPrimo(18));
+		
+		// long[] aux = gap( 6 , 100 , 100 );
 
 	}
 
