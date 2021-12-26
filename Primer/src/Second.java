@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Second {
 
@@ -262,27 +264,85 @@ public class Second {
 
 		firstNumPrime++;
 
-		while (!esPrimo(firstNumPrime) && firstNumPrime <= n ) {
+		while (!esPrimo(firstNumPrime) && firstNumPrime <= n) {
 			firstNumPrime += g - 1;
 		}
-		
-		
-		if ( firstNumPrime > n ) {
+
+		if (firstNumPrime > n) {
 			return null;
-		}else {
+		} else {
 			result[1] = firstNumPrime; // Agrego el segundo
 		}
-		
 
 		return result;
 	}
-	
-	public static void mostrarArrayLong( long[] arr ) {
-		if ( arr != null ) {
-			for ( int i = 0 ; i < arr.length ; i++ ) { 
-				System.out.println( arr[i] );
+
+	public static void mostrarArrayLong(long[] arr) {
+		if (arr != null) {
+			for (int i = 0; i < arr.length; i++) {
+				System.out.println(arr[i]);
 			}
 		}
+	}
+
+	/*
+	 * In this simple Kata your task is to create a function that turns a string
+	 * into a Mexican Wave. You will be passed a string and you must return that
+	 * string in an array where an uppercase letter is a person standing up. Rules
+	 * 1. The input string will always be lower case but maybe empty.
+	 * 
+	 * 2. If the character in the string is whitespace then pass over it as if it
+	 * was an empty seat Example wave("hello") => []string{"Hello", "hEllo",
+	 * "heLlo", "helLo", "hellO"}
+	 */
+
+	public static String[] wave(String str) {
+
+		if (str.isEmpty())
+			return new String[] {};
+
+		String[] result = new String[str.split("").length];
+
+		StringBuilder palabra = new StringBuilder();
+
+		// System.out.println( str + " " + palabra.toString() ); // Hello y nada
+
+		for (int i = 0; i < str.split("").length; i++) {
+
+			String[] aux = str.split("");
+
+			System.out.println(str.split("").length + " " + aux.length); // 5 5
+
+			for (int j = 0; j < aux.length; j++) {
+
+				System.out.println(str.indexOf(aux[j]));
+
+				if (str.indexOf(aux[j]) == i) {
+					palabra.append(aux[j].toUpperCase());
+				} else {
+					palabra.append(aux[j]);
+				}
+			}
+
+			result[i] = palabra.toString();
+			palabra.delete(0, palabra.length());
+
+		}
+
+		return result;
+	}
+
+	// OR
+
+	public static String[] wave1(String str) {
+		List<String> list = new ArrayList<>(); // Me creo la lista
+		for (int i = 0; i < str.length(); i++) { // voy a recorrer todos los elementos de la palabra
+			char ch = str.charAt(i); // Tomo el caracter
+			if (ch == ' ') // Si es vacio => paso al siguiente paso
+				continue;
+			list.add(str.substring(0, i) + Character.toUpperCase(ch) + str.substring(i + 1)); // agrego a la lista 
+		}
+		return list.toArray(new String[0]); // Convierto a String[] Array 
 	}
 
 	public static void main(String[] args) {
@@ -305,10 +365,13 @@ public class Second {
 		System.out.println(sb);
 
 		System.out.println(esPrimo(18));
-		
-		long[] aux = gap( 8 , 300 , 400 );
-		
-		mostrarArrayLong( aux );
+
+		long[] aux = gap(8, 300, 400);
+
+		mostrarArrayLong(aux);
+
+		String[] auxd = wave("hello");
+		System.out.println(auxd.toString());
 
 	}
 
