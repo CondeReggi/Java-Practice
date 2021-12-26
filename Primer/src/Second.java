@@ -340,9 +340,74 @@ public class Second {
 			char ch = str.charAt(i); // Tomo el caracter
 			if (ch == ' ') // Si es vacio => paso al siguiente paso
 				continue;
-			list.add(str.substring(0, i) + Character.toUpperCase(ch) + str.substring(i + 1)); // agrego a la lista 
+			list.add(str.substring(0, i) + Character.toUpperCase(ch) + str.substring(i + 1)); // agrego a la lista
 		}
-		return list.toArray(new String[0]); // Convierto a String[] Array 
+		return list.toArray(new String[0]); // Convierto a String[] Array
+	}
+
+	/*
+	 * Given two arrays a and b write a function comp(a, b) (orcompSame(a, b)) that
+	 * checks whether the two arrays have the "same" elements, with the same
+	 * multiplicities (the multiplicity of a member is the number of times it
+	 * appears). "Same" means, here, that the elements in b are the elements in a
+	 * squared, regardless of the order.
+	 */
+
+	public static boolean contains(final int[] arr, final int key) {
+		Arrays.sort(arr);
+		return Arrays.binarySearch(arr, key) >= 0;
+	}
+
+	public static boolean comp(int[] a, int[] b) {
+		if ((a == null) || (b == null)) {
+			return false;
+		}
+		int[] aa = Arrays.stream(a).map(n -> n * n).toArray(); // Hago el cuadrado del primero
+		Arrays.sort(aa); // Los ordeno
+		Arrays.sort(b);
+		return (Arrays.equals(aa, b)); // Veo si son iguales
+	}
+
+	/*
+	 * Write a method that takes an array of consecutive (increasing) letters as
+	 * input and that returns the missing letter in the array.
+	 * 
+	 * You will always get an valid array. And it will be always exactly one letter
+	 * be missing. The length of the array will always be at least 2. The array will
+	 * always contain letters in only one case.
+	 * 
+	 * Example: ['a','b','c','d','f'] -> 'e' ['O','Q','R','S'] -> 'P'
+	 */
+
+	public static char findMissingLetter(char[] array) {
+		// Hallar numero ordinal de cada elemento => (int)"b".charAt(0)
+
+		for (int i = 1; i < array.length; i++) {
+			if ((int) array[i - 1] - (int) array[i] != -1) {
+
+				// System.out.println( array[i - 1] + " " + array[i]);
+
+				int numberReturn = (int) array[i] - 1;
+				return (char) numberReturn;
+			}
+		}
+
+		return ' ';
+	}
+
+	/*
+	 * There is an array with some numbers. All numbers are equal except for one.
+	 * Try to find it!
+	 * 
+	 * Kata.findUniq(new double[]{ 1, 1, 1, 2, 1, 1 }); // => 2 Kata.findUniq(new
+	 * double[]{ 0, 0, 0.55, 0, 0 }); // => 0.55
+	 */
+
+	public static double findUniq(double arr[]) {
+
+		Arrays.sort(arr);
+		return (arr[0] == arr[1]) ? arr[arr.length - 1] : arr[0];
+
 	}
 
 	public static void main(String[] args) {
@@ -372,6 +437,18 @@ public class Second {
 
 		String[] auxd = wave("hello");
 		System.out.println(auxd.toString());
+
+		char a2 = 'a';
+
+		System.out.println((int) a2);
+
+		System.out.println((int) "b".charAt(0));
+		System.out.println((char) 101);
+
+		int[] a = new int[] { 121, 144, 19, 161, 19, 144, 19, 11 };
+		// int[] b = new int[]{121, 14641, 20736, 361, 25921, 361, 20736, 361};
+
+		System.out.println(contains(a, (int) Math.sqrt(141)));
 
 	}
 
